@@ -15,7 +15,6 @@ __pycache__/
 *.pyc
 pycache
 db.sqlite3
-
 # Backup files #
 *.bak
 
