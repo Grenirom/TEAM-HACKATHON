@@ -1,57 +1,37 @@
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.shortcuts import render
+from django.contrib.auth import get_user_model
+from rest_framework import serializers
+from django.contrib.auth.password_validation import validate_password
+
+# from account.models import CustomAccount
 
 
-def password_reset(request):
-    if request.method == 'POST':
-        form = PasswordResetForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            try:
-                user = User.objects.get(email=email)
-            except User.DoesNotExist:
-                # Если пользователь с указанным адресом электронной почты не найден
-                return render(request, 'password_reset.html', {'form': form, 'error': 'User not found'})
-
-            token = default_token_generator.make_token(user)  # Генерация и сохранение токена сброса пароля
-            user.password_reset_token = token
-            user.save()
-
-            # Отправка письма с инструкциями по сбросу пароля
-            reset_link = request.build_absolute_uri(f'/password-reset/{token}')
-            send_mail(
-                'Password Reset',
-                f'Please follow the link to reset your password: {reset_link}',
-                'from@example.com',
-                [email],
-                fail_silently=False,
-            )
-
-            return render(request, 'password_reset.html', {'form': form, 'success': True})
-    else:
-        form = PasswordResetForm()
-    return render(request, 'password_reset.html', {'form': form})
+User = get_user_model()
 
 
-def password_reset_confirm(request, token):
-    try:
-        user = User.objects.get(password_reset_token=token)
-    except User.DoesNotExist:
-        return render(request, 'password_reset_confirm.html', {'error': 'Invalid or expired token'})
-    # Если токен недействителен или истек
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(min_length=8, max_length=20, required=True, write_only=True)
+    password2 = serializers.CharField(min_length=8, max_length=20, required=True, write_only=True)
 
-    if request.method == 'POST':
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
-        if password == confirm_password:
+    class Meta:
+        model = User
+        fields = ('email', 'password', 'password2', 'first_name', 'last_name', 'username')
 
-            user.set_password(password)
-            user.password_reset_token = ''  # Изменение пароля пользователя
-            user.save()
-            return render(request, 'password_reset_confirm.html', {'success': True})
-        else:
-            return render(request, 'password_reset_confirm.html', {'error': 'Passwords do not match'})
+    def validate(self, attrs):
+        password = attrs['password']
+        password2 = attrs.pop('password2')
+        if password2 != password:
+            raise serializers.ValidationError('Passwords didn\'t match!')
+        validate_password(password)
+        return attrs
 
-    return render(request, 'password_reset_confirm.html')
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('password',)
+
+
