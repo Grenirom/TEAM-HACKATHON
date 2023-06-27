@@ -30,20 +30,8 @@ from .views import (
     FavoriteDeleteView,
 )
 
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
-
-urlpatterns += static(
-    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-)
-
-
-
-urlpatterns = [
     path('comments/create/', CommentCreateView.as_view(), name='comment-create'),
     path('comments/update/<int:pk>/', CommentUpdateView.as_view(), name='comment-update'),
     path('comments/delete/<int:pk>/', CommentDeleteView.as_view(), name='comment-delete'),
@@ -52,3 +40,7 @@ urlpatterns = [
     path('favorites/create/', FavoriteCreateView.as_view(), name='favorite-create'),
     path('favorites/delete/<int:pk>/', FavoriteDeleteView.as_view(), name='favorite-delete'),
 ]
+
+urlpatterns += static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)
