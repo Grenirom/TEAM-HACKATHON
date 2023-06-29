@@ -1,5 +1,4 @@
 from django.db import models
-
 from hackathon import settings
 from products.models import Product
 

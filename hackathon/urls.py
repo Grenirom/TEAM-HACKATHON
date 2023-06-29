@@ -30,13 +30,6 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('account/', include('account.urls')),
     path('like/', include('likes.urls')),
-#     path('comments/create/', CommentCreateView.as_view(), name='comment-create'),
-#     path('comments/update/<int:pk>/', CommentUpdateView.as_view(), name='comment-update'),
-#     path('comments/delete/<int:pk>/', CommentDeleteView.as_view(), name='comment-delete'),
-#     path('likes/create/', LikeCreateView.as_view(), name='like-create'),
-#     path('likes/delete/<int:pk>/', LikeDeleteView.as_view(), name='like-delete'),
-#     path('favorites/create/', FavoriteCreateView.as_view(), name='favorite-create'),
-#     path('favorites/delete/<int:pk>/', FavoriteDeleteView.as_view(), name='favorite-delete'),
 ]
 
 urlpatterns += static(

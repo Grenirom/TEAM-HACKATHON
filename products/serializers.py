@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from products.models import Product
 
 
@@ -46,3 +45,4 @@ class ProductListingSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Favorite
 #         fields = ('id', 'user', 'product')
+>>>>>>> d7cc0ea982cf7f00f8f313c2bd8a3f5254f0cded

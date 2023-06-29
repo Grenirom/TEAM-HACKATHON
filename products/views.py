@@ -81,3 +81,4 @@ from likes.models import Like
 #     queryset = Favorite.objects.all()
 #     serializer_class = FavoriteSerializer
 #     permission_classes = [IsAuthenticated]
+>>>>>>> d7cc0ea982cf7f00f8f313c2bd8a3f5254f0cded

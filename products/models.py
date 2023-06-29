@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 from hackathon import settings
 
 
@@ -10,13 +9,5 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, default='default-image.jpg')
     desc = models.TextField(blank=True)
     price = models.SmallIntegerField(null=True)
-
-
-
-# поля модели Product
-
-
-
-
 
 

@@ -30,7 +30,7 @@ def create_activation_code(self):
 def send_password_change_mail(user):
     code = str(uuid4())
     print(code, '=============')
-    link = f'http://{HOST}/account/confirm_reset/{code}'
+    link = f'http://{HOST}/account/reset/confirm_reset/{code}'
     send_mail(
         'Здравствуйте!',
         'Для сброса пароля, перейдите по ссылке ниже:'
