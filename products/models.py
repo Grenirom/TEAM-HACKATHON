@@ -5,23 +5,18 @@ from hackathon import settings
 
 
 class Product(models.Model):
-    pass
+    title = models.CharField(max_length=150, unique=True, default='No title')
+    # category = models.ForeignKey(Category)
+    image = models.ImageField(upload_to='images/', blank=True, default='default-image.jpg')
+    desc = models.TextField(blank=True)
+    price = models.SmallIntegerField(null=True)
+
 
 
 # поля модели Product
 
-class Comment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
 
 
-class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 
-class Favorite(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
