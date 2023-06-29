@@ -1,20 +1,48 @@
 from rest_framework import serializers
-from .models import Comment, Like, Favorite
+
+from products.models import Product
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comment
-        fields = ('id', 'user', 'product', 'content', 'created_at')
+        model = Product
+        fields = '__all__'
 
 
-class LikeSerializer(serializers.ModelSerializer):
+class ProductListingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Like
-        fields = ('id', 'user', 'product')
+        model =Product
+        fields = ('title', 'image', 'price')
 
 
-class FavoriteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Favorite
-        fields = ('id', 'user', 'product')
+
+
+
+
+
+
+
+
+
+
+
+
+# from .models import Comment, Like, Favorite
+
+
+# class CommentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Comment
+#         fields = ('id', 'user', 'product', 'content', 'created_at')
+#
+#
+# class LikeSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Like
+#         fields = ('id', 'user', 'product')
+#
+#
+# class FavoriteSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Favorite
+#         fields = ('id', 'user', 'product')
