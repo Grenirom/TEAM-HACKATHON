@@ -1,9 +1,10 @@
 from uuid import uuid4
 
 from rest_framework.decorators import action
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import GenericViewSet, ViewSet
 from rest_framework.mixins import ListModelMixin
 from account.send_mail import send_activation_code, send_password_change_mail
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -43,8 +44,11 @@ class AccountViewSet(ListModelMixin, GenericViewSet):
         user.save()
         return Response({'msg': 'Successfully registered!'}, status=200)
 
-    @action(['POST'], detail=False)
-    def forgot(self, request, **kwargs):
+
+class ResetPasswordAPIVIew(CreateAPIView):
+    # queryset = User.objects.all()
+    permission_classes = (AllowAny, )
+    def post(self, request, **kwargs):
         serializer = PasswordResetSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -56,8 +60,11 @@ class AccountViewSet(ListModelMixin, GenericViewSet):
                 return Response({'msg': 'Issues with email!'})
             return Response({'msg': 'The reset mail was sent to your email address!'}, status=200)
 
-    @action(['POST'], detail=False, url_path='confirm_reset/(?P<uuid>[0-9A-Fa-f-]+)')
-    def confirm_reset(self, request, uuid):
+
+class ResetPasswordConfirmAPIView(CreateAPIView):
+    # @action(['POST'], detail=False, url_path='confirm_reset/(?P<uuid>[0-9A-Fa-f-]+)')
+    permission_classes = (AllowAny,)
+    def post(self, request, uuid):
         code = str(uuid4())
         serializer = ConfirmResetSerializer(data=request.data, context={'reset_code': uuid})
         serializer.is_valid(raise_exception=True)
