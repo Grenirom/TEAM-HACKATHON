@@ -8,6 +8,8 @@ router.register('', AccountViewSet)
 urlpatterns = [
     path('login/', LoginView.as_view()),
     path('refresh/', RefreshView.as_view()),
+    # path('reset/', PasswordResetView.as_view()),
+    path('detail-update/<int:pk>/', DetailUpdateUserView.as_view()),
     path('', include(router.urls)),
 ]
 
