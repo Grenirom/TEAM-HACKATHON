@@ -12,7 +12,6 @@ class CustomAccount(AbstractUser):
     username = models.CharField(max_length=100, blank=True)
     first_name = models.CharField(_("first name"), max_length=150)
     last_name = models.CharField(_("last name"), max_length=150)
-    reset_code = models.CharField(max_length=255, blank=True)
     # comments = models.ForeignKey(Comments, blank=True)
     avatar = models.ImageField(upload_to='images', blank=True, default='images/default_avatar.jpg')
     is_active = models.BooleanField(
