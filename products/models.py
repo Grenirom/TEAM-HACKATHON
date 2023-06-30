@@ -9,5 +9,3 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, default='default-image.jpg')
     desc = models.TextField(blank=True)
     price = models.SmallIntegerField(null=True)
-
-
