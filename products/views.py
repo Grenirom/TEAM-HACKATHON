@@ -1,17 +1,23 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 from products.models import Product
 from products.serializers import ProductSerializer, ProductListingSerializer
 
 
-class ProductCreateView(generics.ListCreateAPIView):
+class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
 
-    def get_serializer_class(self, request):
-        if request.method == 'POST':
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
             return ProductSerializer
-        return ProductListingSerializer
+        elif self.request.method == 'GET':
+            return ProductListingSerializer
+
+    def get_permission_classes(self):
+        if self.request.method == 'GET':
+            return permissions.AllowAny
+        elif self.request.method == 'POST':
+            return permissions.IsAdminUser
 
 
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -81,4 +87,4 @@ from likes.models import Like
 #     queryset = Favorite.objects.all()
 #     serializer_class = FavoriteSerializer
 #     permission_classes = [IsAuthenticated]
->>>>>>> d7cc0ea982cf7f00f8f313c2bd8a3f5254f0cded
+# >>>>>>> d7cc0ea982cf7f00f8f313c2bd8a3f5254f0cded

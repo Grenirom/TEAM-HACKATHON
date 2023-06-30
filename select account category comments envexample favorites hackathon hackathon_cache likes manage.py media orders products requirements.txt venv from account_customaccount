@@ -1,0 +1,21 @@
+                        List of relations
+ Schema |                  Name                  | Type  | Owner 
+--------+----------------------------------------+-------+-------
+ public | account_customaccount                  | table | timur
+ public | account_customaccount_groups           | table | timur
+ public | account_customaccount_user_permissions | table | timur
+ public | auth_group                             | table | timur
+ public | auth_group_permissions                 | table | timur
+ public | auth_permission                        | table | timur
+ public | comments_comment                       | table | timur
+ public | django_admin_log                       | table | timur
+ public | django_content_type                    | table | timur
+ public | django_migrations                      | table | timur
+ public | django_session                         | table | timur
+ public | favorites_favorite                     | table | timur
+ public | likes_like                             | table | timur
+ public | products_product                       | table | timur
+ public | token_blacklist_blacklistedtoken       | table | timur
+ public | token_blacklist_outstandingtoken       | table | timur
+(16 rows)
+
