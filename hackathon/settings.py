@@ -195,6 +195,7 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
 }
 
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'Token': {
@@ -212,3 +213,4 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'hackathon_cache'),
     }
 }
+
