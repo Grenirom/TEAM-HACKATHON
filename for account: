@@ -1,0 +1,6 @@
+ id |          last_login           | is_superuser | is_staff |          date_joined          |        email        |                                         password                                         |           activation_code            | username | first_name | last_name |          avatar           | is_active 
+----+-------------------------------+--------------+----------+-------------------------------+---------------------+------------------------------------------------------------------------------------------+--------------------------------------+----------+------------+-----------+---------------------------+-----------
+  3 | 2023-06-29 16:35:51.010769+06 | t            | t        | 2023-06-29 16:35:41.101322+06 | admin@admin.com     | pbkdf2_sha256$600000$I0xoGQKKsfv2E2bgRYMHmv$N0HjDQHwZoTZhW9wgjnp4smgB2dQB/DlokwkoPAkMU4= | 9be4cd51-1f8c-4582-b549-fe27a9d25900 |          |            |           | images/default_avatar.jpg | t
+  6 |                               | f            | f        | 2023-06-30 12:34:35.324676+06 | vanai8120@gmail.com | pbkdf2_sha256$390000$5rGbbGVS2dMIVqNTrpL55S$+csaQFe3NhnyZ7JaT6S+mzN9hFRZQwhEJ+JT0q0avPg= |                                      |          | kolobok    | bublik    | images/default_avatar.jpg | t
+(2 rows)
+

@@ -1,15 +1,11 @@
-from uuid import uuid4
-
 from rest_framework.decorators import action
-from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.viewsets import GenericViewSet, ViewSet
+from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import ListModelMixin
-from account.send_mail import send_activation_code, send_password_change_mail
+from account.send_mail import send_activation_code
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.contrib.auth.views import LogoutView
-from rest_framework import generics, status
+from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import *
 
@@ -43,40 +39,6 @@ class AccountViewSet(ListModelMixin, GenericViewSet):
         user.activation_code = ''
         user.save()
         return Response({'msg': 'Successfully registered!'}, status=200)
-
-
-class ResetPasswordAPIVIew(CreateAPIView):
-    # queryset = User.objects.all()
-    permission_classes = (AllowAny, )
-    def post(self, request, **kwargs):
-        serializer = PasswordResetSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        if user:
-            try:
-                send_password_change_mail(user.email)
-            except Exception as e:
-                print(e, '************************')
-                return Response({'msg': 'Issues with email!'})
-            return Response({'msg': 'The reset mail was sent to your email address!'}, status=200)
-
-
-class ResetPasswordConfirmAPIView(CreateAPIView):
-    # @action(['POST'], detail=False, url_path='confirm_reset/(?P<uuid>[0-9A-Fa-f-]+)')
-    permission_classes = (AllowAny,)
-    def post(self, request, uuid):
-        code = str(uuid4())
-        serializer = ConfirmResetSerializer(data=request.data, context={'reset_code': uuid})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        try:
-            user = User.objects.create(reset_code=code)
-        except:
-            return Response({"msg": 'Invalid link, or link has expired!'}, status=400)
-        user.set_password(serializer.password)
-        user.reset_code = ''
-        user.save()
-        return Response({'msg': 'Successfully changed your password!'})
 
 
 class LoginView(TokenObtainPairView):

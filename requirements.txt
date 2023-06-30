@@ -7,4 +7,5 @@ django-filter
 drf-yasg
 gunicorn
 djangorestframework-simplejwt
+django-cachalot
 
