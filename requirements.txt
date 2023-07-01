@@ -8,4 +8,6 @@ drf-yasg
 gunicorn
 djangorestframework-simplejwt
 django-cachalot
+redis
+celery[redis]
 
