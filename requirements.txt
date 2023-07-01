@@ -8,4 +8,5 @@ drf-yasg
 gunicorn
 djangorestframework-simplejwt
 django-cachalot
-
+django-rest-passwordreset
+coreapi

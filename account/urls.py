@@ -11,5 +11,6 @@ urlpatterns = [
     path('refresh/', RefreshView.as_view()),
     path('detail-update/<int:pk>/', DetailUpdateUserView.as_view()),
     path('', include(router.urls)),
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 

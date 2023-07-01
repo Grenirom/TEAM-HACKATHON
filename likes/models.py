@@ -1,11 +1,13 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from hackathon import settings
 from products.models import Product
+
+User = get_user_model()
 
 
 class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey('account.CustomAccount', related_name='likes', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='likes', on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ['user', 'product']
