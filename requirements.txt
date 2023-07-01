@@ -10,3 +10,9 @@ djangorestframework-simplejwt
 django-cachalot
 django-rest-passwordreset
 coreapi
+redis
+celery[redis]
+bs4
+telebot
+requests
+
