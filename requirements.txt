@@ -10,4 +10,7 @@ djangorestframework-simplejwt
 django-cachalot
 redis
 celery[redis]
+bs4
+telebot
+requests
 
