@@ -1,5 +1,5 @@
 """
-WSGI config for hackathon project.
+WSGI config for BlogAPI project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
