@@ -13,6 +13,8 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from decouple import config
+import logging
+# from .logging_config import logger
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -235,3 +237,21 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 # celery -A hackathon worker -l INFO - запуск Celery
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "logfile.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}

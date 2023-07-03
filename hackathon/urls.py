@@ -36,6 +36,7 @@ urlpatterns = [
     path('comments/', include('comments.urls')),
     path('product/', include('products.urls')),
     path('category/', include('category.urls')),
+    path('order/', include('orders.urls')),
 ]
 
 urlpatterns += static(
